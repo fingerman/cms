@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>User list</h1>
+
+	<table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Admin Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('cms_user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password|slice(0,20) }}</td>
+                <td>
+					<a href="{{ path('cms_user_show', { 'id': user.id }) }}" type="button" class="btn btn-info" aria-label="Center Align">
+						View
+					</a>
+					<a href="{{ path('cms_user_edit', { 'id': user.id }) }}" type="button" class="btn btn-info" aria-label="Center Align">
+						Edit
+					</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	
+	<a class="btn btn-primary" href="{{ path('cms_user_new') }}">Add</a>
+
+{% endblock %}
